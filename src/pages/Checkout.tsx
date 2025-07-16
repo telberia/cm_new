@@ -53,8 +53,8 @@ const Checkout = () => {
       <div className="min-h-screen bg-gradient-to-br from-primary/10 to-secondary/10">
         <Header />
         <div className="container mx-auto px-4 py-16">
-          <h1 className="text-2xl font-bold mb-4">{t('checkout.noPlugin')}</h1>
-          <Button onClick={() => navigate("/")}>{t('checkout.returnToPlugins')}</Button>
+          <h1 className="text-2xl font-bold mb-4">Kein Plugin ausgewählt.</h1>
+          <Button onClick={() => navigate("/")}>Zurück zu den Plugins</Button>
         </div>
       </div>
     );
@@ -63,18 +63,54 @@ const Checkout = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
     try {
-      // Here you would typically integrate with a payment processor
-      // For now, we'll just show a success message
-      toast.success("Order submitted successfully!", {
-        description: "We'll process your order and contact you shortly.",
+      // Demo: Lưu trạng thái đã mua vào localStorage
+      localStorage.setItem(`purchased_${plugin.id}`, "true");
+      toast.success("Bestellung erfolgreich!", {
+        description: "Ihre Bestellung wurde erfolgreich aufgegeben. Wir werden Sie in Kürze kontaktieren.",
       });
       navigate("/");
     } catch (error) {
-      toast.error("Failed to process order", {
-        description: "Please try again later.",
+      toast.error("Bestellung fehlgeschlagen", {
+        description: "Bitte versuchen Sie es später erneut.",
       });
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handleStripePay = async () => {
+    try {
+      const res = await fetch('http://localhost:3001/api/plugins/create-stripe-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pluginId: plugin.id, email: form.getValues('email') })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        toast.error('Stripe-Session konnte nicht erstellt werden.');
+      }
+    } catch (err) {
+      toast.error('Stripe-Fehler: ' + err.message);
+    }
+  };
+
+  const handlePayPalPay = async () => {
+    try {
+      const res = await fetch('http://localhost:3001/api/plugins/create-paypal-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pluginId: plugin.id })
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        toast.error('PayPal-Order konnte nicht erstellt werden.');
+      }
+    } catch (err) {
+      toast.error('PayPal-Fehler: ' + err.message);
     }
   };
 
@@ -83,21 +119,21 @@ const Checkout = () => {
       <Header />
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">{t('checkout.title')}</h1>
+          <h1 className="text-3xl font-bold mb-8">Kasse</h1>
           
           <div className="bg-white/95 rounded-lg shadow-xl p-6 mb-8">
-            <h2 className="text-xl font-semibold mb-4">{t('checkout.orderSummary')}</h2>
+            <h2 className="text-xl font-semibold mb-4">Bestellübersicht</h2>
             <div className="flex justify-between items-center">
               <div>
                 <p className="font-medium">{plugin.name}</p>
-                <p className="text-sm text-gray-600">{t('checkout.premiumVersion')}</p>
+                <p className="text-sm text-gray-600">Premium-Version</p>
               </div>
-              <p className="font-semibold">${plugin.price || "49.99"}</p>
+              <p className="font-semibold">€{plugin.price || "49.99"}</p>
             </div>
           </div>
 
           <div className="bg-white/95 rounded-lg shadow-xl p-6">
-            <h2 className="text-xl font-semibold mb-6">{t('checkout.billingInfo')}</h2>
+            <h2 className="text-xl font-semibold mb-6">Rechnungsinformationen</h2>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -106,7 +142,7 @@ const Checkout = () => {
                     name="firstName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('checkout.firstName')}</FormLabel>
+                        <FormLabel>Vorname</FormLabel>
                         <FormControl>
                           <Input {...field} />
                         </FormControl>
@@ -119,7 +155,7 @@ const Checkout = () => {
                     name="lastName"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('checkout.lastName')}</FormLabel>
+                        <FormLabel>Nachname</FormLabel>
                         <FormControl>
                           <Input {...field} />
                         </FormControl>
@@ -134,7 +170,7 @@ const Checkout = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('checkout.email')}</FormLabel>
+                      <FormLabel>E-Mail</FormLabel>
                       <FormControl>
                         <Input type="email" {...field} />
                       </FormControl>
@@ -148,7 +184,7 @@ const Checkout = () => {
                   name="company"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('checkout.company')}</FormLabel>
+                      <FormLabel>Firma</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -162,7 +198,7 @@ const Checkout = () => {
                   name="address"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>{t('checkout.address')}</FormLabel>
+                      <FormLabel>Adresse</FormLabel>
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
@@ -177,7 +213,7 @@ const Checkout = () => {
                     name="city"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('checkout.city')}</FormLabel>
+                        <FormLabel>Stadt</FormLabel>
                         <FormControl>
                           <Input {...field} />
                         </FormControl>
@@ -190,7 +226,7 @@ const Checkout = () => {
                     name="country"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('checkout.country')}</FormLabel>
+                        <FormLabel>Land</FormLabel>
                         <FormControl>
                           <Input {...field} />
                         </FormControl>
@@ -203,7 +239,7 @@ const Checkout = () => {
                     name="postalCode"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>{t('checkout.postalCode')}</FormLabel>
+                        <FormLabel>Postleitzahl</FormLabel>
                         <FormControl>
                           <Input {...field} />
                         </FormControl>
@@ -215,10 +251,17 @@ const Checkout = () => {
 
                 <Button 
                   type="submit" 
-                  className="w-full"
+                  className="w-full hidden"
+                  
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? t('checkout.processing') : t('checkout.completePurchase')}
+                  {isSubmitting ? "Wird verarbeitet..." : "Jetzt kaufen"}
+                </Button>
+                <Button type="button" onClick={handleStripePay} className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                  Mit Kreditkarte (Stripe) bezahlen
+                </Button>
+                <Button type="button" onClick={handlePayPalPay} className="w-full bg-yellow-500 hover:bg-yellow-600 text-black">
+                  Mit PayPal bezahlen
                 </Button>
               </form>
             </Form>

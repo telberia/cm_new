@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { Download, Star, Euro } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { useEffect, useState } from "react";
 
 interface PluginCardProps {
   plugin: Plugin;
@@ -11,10 +12,21 @@ interface PluginCardProps {
 
 export const PluginCard = ({ plugin }: PluginCardProps) => {
   const navigate = useNavigate();
+  const [isPurchased, setIsPurchased] = useState(false);
+
+  useEffect(() => {
+    // Demo: kiểm tra trạng thái đã mua từ localStorage
+    setIsPurchased(!!localStorage.getItem(`purchased_${plugin.id}`));
+  }, [plugin.id]);
 
   const handleLearnMore = () => {
     window.scrollTo(0, 0);
     navigate(`/plugin/${plugin.id}`);
+  };
+
+  const handleBuy = () => {
+    // Chuyển sang trang Checkout, truyền plugin qua state
+    navigate("/checkout", { state: { plugin } });
   };
 
   const handleDownload = () => {
@@ -84,14 +96,23 @@ export const PluginCard = ({ plugin }: PluginCardProps) => {
           onClick={handleLearnMore}
           className="flex-1 hover:bg-primary/5"
         >
-          Learn More
+          Mehr erfahren
         </Button>
-        <Button 
-          className="flex-1 bg-primary hover:bg-primary/90 transition-colors"
-          onClick={handleDownload}
-        >
-          <Download className="w-4 h-4 mr-2" /> Download
-        </Button>
+        {!isPurchased ? (
+          <Button
+            className="flex-1 bg-primary hover:bg-primary/90 transition-colors"
+            onClick={handleBuy}
+          >
+            Kaufen
+          </Button>
+        ) : (
+          <Button
+            className="flex-1 bg-primary hover:bg-primary/90 transition-colors"
+            onClick={handleDownload}
+          >
+            <Download className="w-4 h-4 mr-2" /> Herunterladen
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );
