@@ -52,17 +52,16 @@ const Header = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <Link to="/plugins">
+                  <Link to="/">
                     <NavigationMenuLink className="px-4 py-2 text-secondary hover:text-primary transition-colors">
-                      {t('header.plugins')}
+                      {t('header.whatWeDo')}
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
-
                 <NavigationMenuItem>
-                  <Link to="/was-wir-tun">
+                  <Link to="/plugins">
                     <NavigationMenuLink className="px-4 py-2 text-secondary hover:text-primary transition-colors">
-                      {t('header.whatWeDo')}
+                      {t('header.plugins')}
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -110,7 +109,7 @@ const Header = () => {
                 {t('header.plugins')}
               </Link>
               <Link 
-                to="/was-wir-tun" 
+                to="/" 
                 className="text-secondary hover:text-primary transition-colors px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
