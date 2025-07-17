@@ -37,16 +37,16 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<WhatWeDo />} />
+            <Route path="/was-wir-tun" element={<WhatWeDo />} />
+            <Route path="/plugins" element={<Index />} />
             <Route path="/plugin/:id" element={<PluginDetail />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/imprint" element={<Imprint />} />
-            <Route path="/what-we-do" element={<WhatWeDo />} />
+            <Route path="/kontakt" element={<Contact />} />
+            <Route path="/impressum" element={<Imprint />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/checkout-success" element={<CheckoutSuccess />} />
             <Route path="/checkout-paypal-success" element={<CheckoutPayPalSuccess />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/plugins" element={<Index />} />
+            <Route path="/anmelden" element={<Login />} />
+            <Route path="/registrieren" element={<Register />} />
           </Routes>
         </BrowserRouter>
         <CookieBanner />

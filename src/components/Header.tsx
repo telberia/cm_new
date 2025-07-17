@@ -60,7 +60,7 @@ const Header = () => {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link to="/what-we-do">
+                  <Link to="/was-wir-tun">
                     <NavigationMenuLink className="px-4 py-2 text-secondary hover:text-primary transition-colors">
                       {t('header.whatWeDo')}
                     </NavigationMenuLink>
@@ -68,7 +68,7 @@ const Header = () => {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link to="/contact">
+                  <Link to="/kontakt">
                     <NavigationMenuLink className="px-4 py-2 text-secondary hover:text-primary transition-colors">
                       {t('header.contact')}
                     </NavigationMenuLink>
@@ -76,7 +76,7 @@ const Header = () => {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link to="/imprint">
+                  <Link to="/impressum">
                     <NavigationMenuLink className="px-4 py-2 text-secondary hover:text-primary transition-colors">
                       {t('header.imprint')}
                     </NavigationMenuLink>
@@ -84,9 +84,9 @@ const Header = () => {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <Link to="/login">
+                  <Link to="/anmelden">
                     <NavigationMenuLink className="px-4 py-2 text-secondary hover:text-primary transition-colors">
-                      Anmelden
+                      {t('header.login')}
                     </NavigationMenuLink>
                   </Link>
                 </NavigationMenuItem>
@@ -110,32 +110,32 @@ const Header = () => {
                 {t('header.plugins')}
               </Link>
               <Link 
-                to="/what-we-do" 
+                to="/was-wir-tun" 
                 className="text-secondary hover:text-primary transition-colors px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t('header.whatWeDo')}
               </Link>
               <Link 
-                to="/contact" 
+                to="/kontakt" 
                 className="text-secondary hover:text-primary transition-colors px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t('header.contact')}
               </Link>
               <Link 
-                to="/imprint" 
+                to="/impressum" 
                 className="text-secondary hover:text-primary transition-colors px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t('header.imprint')}
               </Link>
               <Link 
-                to="/login" 
+                to="/anmelden" 
                 className="text-secondary hover:text-primary transition-colors px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Anmelden
+                {t('header.login')}
               </Link>
             </div>
           </nav>

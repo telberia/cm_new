@@ -24,7 +24,7 @@ const Index = () => {
             {t('index.whoWeAre')}
           </h1>
           <p className="text-xl text-gray-600 leading-relaxed">
-            Seit über 10 Jahren entwickeln wir in Graz moderne Web- und App-Lösungen sowie individuelle WordPress-Plugins – speziell für Unternehmen. Mit unserem agilen Ansatz sind schnelle Änderungen und Anpassungen jederzeit möglich. Wir liefern funktionale, maßgeschneiderte Lösungen, die Ihr Business digital voranbringen.
+            {t('index.heroText')}
           </p>
         </div>
 

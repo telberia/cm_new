@@ -18,10 +18,11 @@ const translations = {
     'header.whatWeDo': 'What We Do',
     'header.contact': 'Contact',
     'header.imprint': 'Imprint',
+    'header.login': 'Login',
     
     // Index page
     'index.whoWeAre': 'Who We Are',
-    'index.heroText': 'For over 10 years, our cool agency has been delivering cutting-edge web, app solutions, and custom WordPress plugins, tailored to make your projects stand out.',
+    'index.heroText': 'For over 10 years, we have been developing modern web and app solutions in Graz, as well as custom WordPress plugins – especially for businesses. With our agile approach, quick changes and adjustments are always possible. We deliver functional, tailor-made solutions that digitally advance your business.',
     'index.featuredPlugin': 'Featured Plugin of the Month',
     'index.featuredDescription': 'Discover our handpicked selection of exceptional WordPress plugins that can transform your website. Each month, we highlight a plugin that stands out for its innovation, reliability, and user experience.',
     'index.learnMore': 'Learn More',
@@ -86,10 +87,11 @@ const translations = {
     'header.whatWeDo': 'Was wir tun',
     'header.contact': 'Kontakt',
     'header.imprint': 'Impressum',
+    'header.login': 'Anmelden',
     
     // Index page
     'index.whoWeAre': 'Wer wir sind',
-    'index.heroText': 'Seit über 10 Jahren liefert unsere coole Agentur modernste Web- und App-Lösungen sowie maßgeschneiderte WordPress-Plugins, die Ihre Projekte hervorheben.',
+    'index.heroText': 'Seit über 10 Jahren entwickeln wir in Graz moderne Web- und App-Lösungen sowie individuelle WordPress-Plugins – speziell für Unternehmen. Mit unserem agilen Ansatz sind schnelle Änderungen und Anpassungen jederzeit möglich. Wir liefern funktionale, maßgeschneiderte Lösungen, die Ihr Business digital voranbringen.',
     'index.featuredPlugin': 'Plugin des Monats',
     'index.featuredDescription': 'Entdecken Sie unsere handverlesene Auswahl außergewöhnlicher WordPress-Plugins, die Ihre Website transformieren können. Jeden Monat heben wir ein Plugin hervor, das sich durch Innovation, Zuverlässigkeit und Benutzererfahrung auszeichnet.',
     'index.learnMore': 'Mehr erfahren',
