@@ -9,6 +9,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'secret';
 
 // Đăng ký
 router.post('/register', async (req, res) => {
+  console.log('Register API called', req.body);
   const { email, password, name } = req.body;
   if (!email || !password || !name) return res.status(400).json({ error: 'Missing fields' });
   try {
@@ -19,6 +20,7 @@ router.post('/register', async (req, res) => {
     await db.query(`INSERT INTO ${prefix}users (email, password, name, role) VALUES ($1, $2, $3, 'user')`, [email, hash, name]);
     res.json({ success: true });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });
