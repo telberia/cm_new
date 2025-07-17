@@ -52,7 +52,7 @@ const Header = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <Link to="/">
+                  <Link to="/plugins">
                     <NavigationMenuLink className="px-4 py-2 text-secondary hover:text-primary transition-colors">
                       {t('header.plugins')}
                     </NavigationMenuLink>
@@ -103,7 +103,7 @@ const Header = () => {
                 <LanguageSwitcher />
               </div>
               <Link 
-                to="/" 
+                to="/plugins" 
                 className="text-secondary hover:text-primary transition-colors px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >

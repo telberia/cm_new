@@ -36,7 +36,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<WhatWeDo />} />
             <Route path="/plugin/:id" element={<PluginDetail />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/imprint" element={<Imprint />} />
@@ -46,6 +46,7 @@ const App = () => (
             <Route path="/checkout-paypal-success" element={<CheckoutPayPalSuccess />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/plugins" element={<Index />} />
           </Routes>
         </BrowserRouter>
         <CookieBanner />

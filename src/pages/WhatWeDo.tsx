@@ -2,6 +2,7 @@
 import Header from "../components/Header";
 import { useLanguage } from "../contexts/LanguageContext";
 import { useEffect } from "react";
+import { Helmet } from 'react-helmet';
 
 const WhatWeDo = () => {
   const { t } = useLanguage();
@@ -12,6 +13,11 @@ const WhatWeDo = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/10 to-secondary/10">
+      <Helmet>
+        <title>Codemenschen GmbH – Web- & App-Entwicklung mit KI</title>
+        <meta name="description" content="Maßgeschneiderte Web- & Mobile-Lösungen mit über 10 Jahren Erfahrung. Wir entwickeln moderne, skalierbare Anwendungen mit KI-Integration. Jetzt kontaktieren!" />
+        <meta name="keywords" content="Webentwicklung, App Entwicklung, Mobile App Agentur, KI Integration, WordPress Plugins, individuelle Softwareentwicklung, Webagentur Deutschland, Codemenschen GmbH, maßgeschneiderte Lösungen, E-Commerce Entwicklung, Cloud Anwendungen, Chatbot Integration, digitale Transformation" />
+      </Helmet>
       <Header />
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto">
